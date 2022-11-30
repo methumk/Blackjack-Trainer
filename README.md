@@ -2,7 +2,8 @@
 Allows you to train skills for black jack: Basic strategy and Hi-Lo counting
 
 ## Basic Strategy
-![basic strat](./images/mini-blackjack-strategy-chart.webp =400x)
+<img src="./images/mini-blackjack-strategy-chart.webp" width="200"/>
+
 <sub> *source: https://www.blackjackapprenticeship.com/blackjack-strategy-charts/*</sub>
 
 <p>
