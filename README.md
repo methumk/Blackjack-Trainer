@@ -7,9 +7,14 @@ Allows you to train skills for black jack: Basic strategy and Hi-Lo counting
 <sub> *source: https://www.blackjackapprenticeship.com/blackjack-strategy-charts/*</sub>
 
 <p>
-Basic strategy aims to allow the player to decide how to play their hand (Hit, Stand, Double, etc.)
-This trainer helps players master basic strategy by practicing matching the corresponding plays given the dealer and their hand. 
-Note: you are not allowed to surrender
+Basic strategy presents the best moves(Hit, Stand, Double, etc.) for a given player's and dealer's hand. Memorizing this alone is not enough to beat the house's edge, but knowing this is essential when trying to beat the dealer.
+<br>
+This trainer helps players master basic strategy by practicing matching the corresponding plays, given the dealer and their hand. 
+<br>
+
+Notes: 
+* you are not allowed to surrender
+* if your card contains a pair that you don't split
 </p>
 
 <p>
