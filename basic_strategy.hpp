@@ -1,5 +1,4 @@
 #pragma once
-#include <iostream>
 #include <vector>
 
 #define NUM_DEALER_UPCARD 10
