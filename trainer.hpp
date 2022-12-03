@@ -27,7 +27,7 @@ public:
         cout << "HILO trainer\n";
         cout << "===========================================================\n";
         cout << "Instructions:\n";
-        cout << "\tRanks [2,6] have a count of 1, [7,9] have a count of 0, and [10, Ace] = -1\n";
+        cout << "\tRanks [2,6] have a count of 1, [7,9] have a count of 0, and [10 - Ace] = -1\n";
         cout << "\tYou will be prompted with cards, your job is to keep track of the running count and the estimated true count\n";
         cout << "\tWhen prompted for the count, enter an integer (0, 5, -1, etc)\n";
         cout << "\tYou response will be timed. This session will go on until all decks are empty or you type quit\n";
