@@ -31,5 +31,9 @@ Below are the corresponding commands for each play:
 </p>
 
 ## Hi-Lo Counting
-Coming soon
+<p>
+Hi-Lo counting is one way to count cards. Low cards (those with rank 2-6) are valued at +1, regular cards (those with rank 7-9) are values at 0, and high cards (10 through Ace) are valued at -1. 
+<br>
+An entire deck of cards has a sum total of 0. This means if you keep a proper count you can guess which type of card you will get. The running count is defined as the total count. The true count is the running count divded by the number of remaining decks. Note that this count can be estimated and doesn't have to be exact.
+</p>
 
