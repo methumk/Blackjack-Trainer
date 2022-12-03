@@ -1,12 +1,16 @@
 #pragma once
 #include <iostream>
+#include <string>
 #include <cstdlib>
 #include <chrono>
 #include <vector>
 #include <algorithm>
 #include <random>
+#include <io.h>
+#include <fcntl.h>
 
-char suite_map[5] = {'I', 'h', 'c', 'd', 's'};
+wchar_t wsuite_map[5] = {'I', L'\x2665', L'\x2663', L'\x2666', L'\x2660'};
+char suite_map[5] = {'I', 'H', 'C', 'D', 'S'};
 enum Suite{
     INVALID_SUITE = 0,
     heart,
@@ -15,7 +19,7 @@ enum Suite{
     spade
 };
  
-std::string rank_map[14] = {"I-", "2 ", "3 ", "4 ", "5 ", "6 ", "7 ", "8 ", "9 ", "10", "j ", "q ", "k ", "a "};
+std::string rank_map[14] = {"I-", "2 ", "3 ", "4 ", "5 ", "6 ", "7 ", "8 ", "9 ", "10", "J ", "Q ", "K ", "A "};
 enum Rank{
     INVALID_RANK = 0,
     r2,
@@ -60,12 +64,16 @@ public:
         }else{
             if (rank <= Rank::r6){
                 hilo = HILO_VAL::lo;
-            }else if (rank >= Rank::r10 || rank == Rank::a){
+            }else if (rank >= Rank::r10){
                 hilo = HILO_VAL::hi;
             }else{
                 hilo = HILO_VAL::reg;
             }
         }
+    }
+
+    wchar_t getWSuite(){
+        return wsuite_map[(int)suite];
     }
 
     char getCSuite(){
@@ -84,12 +92,17 @@ public:
         return rank;
     }
 
-    std::string displayCard(){
-        return getSRank() + getCSuite();
-    }
 
     int getHILO(){
         return (int)hilo;
+    }
+
+    void displayCard(){
+        // switch to unicode mode and print then switch back
+        std::cout << getSRank();
+        _setmode(_fileno(stdout), 0x00020000);
+        std::wcout << getWSuite();
+        _setmode(_fileno(stdout), _O_TEXT);
     }
 
     bool isInvalid(){
@@ -132,15 +145,36 @@ public:
         }
     }
 
+    Deck(bool shuffle){
+        for (int i=0; i < 13; ++i){
+            Card c(Suite::heart, (Rank) (i+1));
+            deck[0][i] = c;
+            valids.push_back(deck[0][i]);
+        }
+        for (int i=0; i < 13; ++i){
+            Card c(Suite::club, (Rank) (i+1));
+            deck[1][i] = c;
+            valids.push_back(deck[1][i]);
+        }
+        for (int i=0; i < 13; ++i){
+            Card c(Suite::diamond, (Rank) (i+1));
+            deck[2][i] = c;
+            valids.push_back(deck[2][i]);
+        }
+        for (int i=0; i < 13; ++i){
+            Card c(Suite::spade, (Rank) (i+1));
+            deck[3][i] = c;
+            valids.push_back(deck[3][i]);
+        }
+
+        if (shuffle)
+            shuffleDeck();
+    }
+
 
 
     // Gets a random card and invalidates it from the deck
     Card getRandom(){
-        unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-        std::default_random_engine e(seed);
-
-        std::shuffle(std::begin(valids), std::end(valids), e);
-
         Card ret(Suite::INVALID_SUITE, Rank::INVALID_RANK);
         int idx = rand()%52;
 
@@ -150,5 +184,15 @@ public:
         }
 
         return ret;
+    }
+
+    void shuffleDeck(){
+        unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+        std::default_random_engine e(seed);
+        std::shuffle(std::begin(valids), std::end(valids), e);
+    }
+
+    bool deckEmpty(){
+        return valids.size() == 0;
     }
 };
